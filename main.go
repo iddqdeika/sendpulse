@@ -7,32 +7,31 @@ import (
 	"sendpulse/api/client"
 )
 
-const(
+const (
 	campaignsFileName = "CampaignsReport.xlsx"
 )
 
-func main(){
-
+func main() {
 
 	client := client.New(
-		"c4013a11dba026e8f052739376a27045",
-		"6e1fcffe7b01c3836e4f791471274620",
+		"",
+		"",
 		nil)
 	books, err := client.GetAddressBooks()
-	if err !=nil{
+	if err != nil {
 		panic(err)
 	}
-	for _, book := range *books{
+	for _, book := range *books {
 		fmt.Println("book: " + book.Name)
 	}
 
 	campaigns, err := client.GetCampaigns()
-	for _, campaign := range *campaigns{
+	for _, campaign := range *campaigns {
 		client.GetCampaignInfo(campaign)
 	}
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
-	api.WriteCampaignsInfoToExcelFile(campaignsFileName,campaigns)
+	api.WriteCampaignsInfoToExcelFile(campaignsFileName, campaigns)
 
 }
