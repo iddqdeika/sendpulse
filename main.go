@@ -52,10 +52,12 @@ func main() {
 	}
 
 	wg.Wait()
-
+	log.Log("Complete! Press ENTER to exit.")
+	fmt.Scanln()
 }
 
 func processClient(client *client.Client) {
+	log.Log("starting processing client \"" + client.Name() + "\"...")
 	books, err := client.GetAddressBooks()
 	if err != nil {
 		log.Alert("books list getting error - " + err.Error())
@@ -85,4 +87,5 @@ func processClient(client *client.Client) {
 		panic(err)
 	}
 	api.WriteCampaignsInfoToExcelFile(campaignsFileName+"_"+client.Name()+".xlsx", campaigns)
+	log.Log("finished processing client \"" + client.Name() + "\"...")
 }

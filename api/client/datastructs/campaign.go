@@ -16,6 +16,7 @@ type Campaign struct {
 	OverdraftPrice      int         `json:"overdraft_price"`
 	OverdraftCurrency   string      `json:"overdraft_currency"`
 	Statistics          []Statictic `json:"statistics"`
+	SendDate            string      `json:"send_date"`
 	StatusMap           map[string]int
 }
 

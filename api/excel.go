@@ -9,6 +9,7 @@ import (
 
 const (
 	campaignName      = "Название рассылки"
+	campaighSendDate  = "Дата отправки"
 	bookNamesList     = "Книги-получатели"
 	senderName        = "Имя отправителя"
 	senderEmail       = "Почта отправителя"
@@ -32,6 +33,7 @@ func WriteCampaignsInfoToExcelFile(fileName string, campaigns *datastructs.Campa
 	for _, campaign := range *campaigns {
 		table.AddRow()
 		table.SetCellValue(campaignName, campaign.Name)
+		table.SetCellValue(campaighSendDate, campaign.SendDate)
 		table.SetCellValue(bookNamesList, campaign.Message.BookNamesList)
 		table.SetCellValue(senderName, campaign.Message.SenderName)
 		table.SetCellValue(senderEmail, campaign.Message.SenderEmail)
@@ -40,7 +42,7 @@ func WriteCampaignsInfoToExcelFile(fileName string, campaigns *datastructs.Campa
 		table.SetCellValue(openCount, strconv.Itoa(campaign.StatusMap[openCountStatus]))
 		table.SetCellValue(linkCount, strconv.Itoa(campaign.StatusMap[linkCountStatus]))
 		table.SetCellValue(openedOfDelivered, countPercents(campaign.StatusMap[deliveredStatus], campaign.StatusMap[openCountStatus]))
-		table.SetCellValue(linkOfOpened, countPercents(campaign.StatusMap[linkCountStatus], campaign.StatusMap[openCountStatus]))
+		table.SetCellValue(linkOfOpened, countPercents(campaign.StatusMap[openCountStatus], campaign.StatusMap[linkCountStatus]))
 		for _, stat := range campaign.Statistics {
 			table.SetCellValue("status \""+stat.Explain+"\"", strconv.Itoa(stat.Count))
 		}

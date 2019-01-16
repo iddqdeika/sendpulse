@@ -69,8 +69,7 @@ func GetConfig(fileName string) (*Config, error) {
 	}
 	cfg, err := Parse(data)
 	if err != nil {
-		cfg := New()
-		cfg.Save(fileName)
+		cfg = New()
 	}
 	return cfg, err
 }
